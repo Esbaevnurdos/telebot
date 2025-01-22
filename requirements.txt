@@ -1,0 +1,6 @@
+aiogram==2.23
+psycopg2-binary
+celery==5.3.1
+magic-filter
+pymongo==4.0.1
+
