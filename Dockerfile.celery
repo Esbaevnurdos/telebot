@@ -8,12 +8,8 @@ COPY . /app/
 # Install Celery dependencies
 RUN pip install --no-cache-dir --timeout=300 -r requirements.txt
 
-# Copy and prepare wait-for-it.sh
-COPY wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
-# Set environment variable for MongoDB URI
-ENV MONGO_URI=mongodb://mongo:27017/todo
+# Set environment variable for PostgreSQL URI
+ENV POSTGRES_URI=postgresql://postgres:password@postgres:5432/todo
 
 # Command to run Celery
-CMD ["/wait-for-it.sh", "redis:6379", "--", "celery", "-A", "bot.tasks", "worker"]
+CMD ["celery", "-A", "bot.tasks", "worker"]

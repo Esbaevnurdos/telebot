@@ -12,15 +12,11 @@ COPY requirements.txt /app/
 # Copy the bot Python file
 COPY bot/todo_bot.py /app/bot/
 
-# Copy and prepare wait-for-it.sh script
-COPY ./wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
 # Install Python dependencies from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set environment variable for MongoDB URI
-ENV MONGO_URI=mongodb://mongo:27017/todo
+# Set environment variable for PostgreSQL URI
+ENV POSTGRES_URI=postgresql://postgres:password@postgres:5432/todo
 
-# Run the bot script after ensuring MongoDB is ready
-CMD ["/wait-for-it.sh", "mongo:27017", "--", "python", "/app/bot/todo_bot.py"]
+# Run the bot script
+CMD ["python", "/app/bot/todo_bot.py"]

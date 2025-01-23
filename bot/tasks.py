@@ -3,6 +3,7 @@ from datetime import datetime
 from bot.database import get_pending_tasks, send_reminder_message
 
 # Initialize the Celery app
+
 app = Celery('tasks', broker='redis://redis:6379/0')
 
 # Define a periodic task for sending reminders
